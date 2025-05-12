@@ -1,0 +1,62 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 1,
+    "no-useless-escape": 0,
+    "prettier/prettier": "warn",
+    "quotes": [2, "single", { "avoidEscape": true }],
+    "import/order": [
+      "warn",
+      {
+        "groups": ["builtin", "external", "internal"],
+        "alphabetize": {
+          "order": "asc"
+        }
+      }
+    ],
+    "spaced-comment": [
+      "error",
+      "always",
+      {
+        "line": {
+          "markers": ["#region", "#endregion", "region", "endregion"]
+        }
+      }
+    ],
+    "eqeqeq": ["error", "always"],
+    "dot-notation": ["error", { "allowPattern": "^[a-z]+(_[a-z]+)+$" }],
+    "no-duplicate-imports": ["error", { "includeExports": true }],
+    "@typescript-eslint/no-duplicate-enum-values": "warn",
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/prefer-to-have-length": "warn",
+    "jest/valid-expect": "error",
+    "newline-before-return": "error",
+    "id-length": ["error", { "exceptions": ["i", "j"], "properties": "never" }],
+    "curly": "error",
+    "object-curly-newline": "error",
+    "object-curly-spacing": "off",
+    "padding-line-between-statements": "error",
+    "eol-last": "error",
+    "object-shorthand": "error"
+  },
+  "plugins": ["prettier", "import", "jest"],
+  "env": {
+    "jest/globals": true,
+    "jest": true
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "Services": {
+    "availabilityService": {
+      "baseUri": "AVAILABILITY_SERVICE_BASE_URI",
+      "host": "AVAILABILITY_SERVICE_HOST"
+    },
+    "bosService": {
+      "baseUri": "BOS_BACKEND_SERVICE_BASE_URI",
+      "host": "BOS_BACKEND_SERVICE_HOST"
+    }
+  }
+}

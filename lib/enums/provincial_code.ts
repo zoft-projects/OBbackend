@@ -1,0 +1,36 @@
+export enum ProvincialCodesEnum {
+  Alberta = 'AB',
+  BritishColumbia = 'BC',
+  Manitoba = 'MB',
+  NewBrunswick = 'NB',
+  NewfoundlandAndLabrador = 'NL',
+  NorthwestTerritories = 'NT',
+  NovaScotia = 'NS',
+  Nunavut = 'NU',
+  Ontario = 'ON',
+  PrinceEdwardIsland = 'PE',
+  Quebec = 'QC',
+  Saskatchewan = 'SK',
+  Yukon = 'YT',
+  All = 'ALL',
+
+  // Reverse mapping
+  AB = 'Alberta',
+  // eslint-disable-next-line @typescript-eslint/no-duplicate-enum-values
+  AL = 'Alberta',
+  BC = 'British Columbia',
+  MB = 'Manitoba',
+  NB = 'New Brunswick',
+  NL = 'Newfoundland and Labrador',
+  NT = 'Northwest Territories',
+  NS = 'Nova Scotia',
+  NU = 'Nunavut',
+  ON = 'Ontario',
+  PE = 'Prince Edward Island',
+  // eslint-disable-next-line @typescript-eslint/no-duplicate-enum-values
+  PEI = 'Prince Edward Island',
+  QC = 'Quebec',
+  SK = 'Saskatchewan',
+  YT = 'Yukon',
+  ALL = 'All',
+}

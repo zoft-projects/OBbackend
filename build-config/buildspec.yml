@@ -1,0 +1,56 @@
+version: 0.2
+
+env:
+  variables:
+    IMAGE_REPO_NAME: 'onebayshore-backend'
+  secrets-manager:
+    GITHUB_TOKEN: github-token-dxp
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - npm i npm@10.2.4 -g
+      - echo Installing global dependencies...
+      - npm install -g typescript @types/node husky lint-staged prettier pretty-quick jest ts-jest
+      - echo Installing project dependencies...
+      - npm install --omit=dev
+  pre_build:
+    commands:
+      - echo Starting unit tests at `date`
+      # - npm test
+      - echo Unit tests execution complete at `date`
+      - aws --region ca-central-1 ecr get-login-password | docker login --username AWS --password-stdin 136666276919.dkr.ecr.ca-central-1.amazonaws.com
+  build:
+    commands:
+      - echo Building for production...
+      - tsc --build tsconfig.json
+      - echo Building the Docker image for the dm-billing-service...
+      - SRC_HASH=`echo $CODEBUILD_SOURCE_VERSION | awk -v FS="(Source/|.zip)" '{print $2}'`
+      - echo Source code hash - $SRC_HASH
+      - curl $(aws --region ca-central-1 lambda get-layer-version-by-arn --arn arn:aws:lambda:ca-central-1:725887861453:layer:Dynatrace_OneAgent_1_303_2_20241004-044259_with_collector_nodejs:1 --query 'Content.Location' --output text) --output layer.zip
+      - unzip -d DynatraceOneAgentExtension layer.zip
+      - docker build -f .Dockerfile -t $ECS_IMAGE_REPO_NAME:$SRC_HASH --build-arg GITHUB_TOKEN=${GITHUB_TOKEN} .
+      - echo Tagging the Docker images...
+      - docker tag $ECS_IMAGE_REPO_NAME:$SRC_HASH 136666276919.dkr.ecr.ca-central-1.amazonaws.com/$ECS_IMAGE_REPO_NAME:$SRC_HASH
+      - echo Pushing the Docker image...
+      - IMAGE_PATH=`echo 136666276919.dkr.ecr.ca-central-1.amazonaws.com/$ECS_IMAGE_REPO_NAME:$SRC_HASH`
+      - docker push $IMAGE_PATH
+      - echo Pushed the Docker image, now packaging CloudFormation templates...
+      - echo $IMAGE_PATH
+      - sed -e "s/\${IMG_HASH}/$SRC_HASH/" .aws/cloudformation/config/dev-params.json > dev-params.json
+      - sed -e "s/\${IMG_HASH}/$SRC_HASH/" .aws/cloudformation/config/staging-params.json > staging-params.json
+      - sed -e "s/\${IMG_HASH}/$SRC_HASH/" .aws/cloudformation/config/production-params.json > production-params.json
+      - cp -f dev-params.json .aws/cloudformation/config/dev-params.json
+      - cp -f staging-params.json .aws/cloudformation/config/staging-params.json
+      - cp -f production-params.json .aws/cloudformation/config/production-params.json
+      - cp -rf .aws dist/
+  post_build:
+    commands:
+      - echo Build Complete
+artifacts:
+  files:
+    - '**/*'
+    - templates/**/*
+  base-directory: dist

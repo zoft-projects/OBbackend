@@ -1,0 +1,91 @@
+{
+  "cSpell.words": [
+    "alayacare",
+    "Belleville",
+    "Brockville",
+    "BSRX",
+    "Calcom",
+    "Carecor",
+    "Carepath",
+    "Careplan",
+    "Careplans",
+    "checkins",
+    "Criterias",
+    "datas",
+    "deeplink",
+    "Dufferin",
+    "Esna",
+    "firstname",
+    "Foye",
+    "Geocodes",
+    "healthcheck",
+    "Kelowna",
+    "lastname",
+    "LHIN",
+    "libx",
+    "middlewares",
+    "moderations",
+    "Neuro",
+    "Nordique",
+    "Notif",
+    "NRIO",
+    "nutritions",
+    "Oakville",
+    "onebay",
+    "onebayshore",
+    "passcode",
+    "peoplesoft",
+    "PHAC",
+    "prepreqs",
+    "Prereq",
+    "Prereqs",
+    "presigner",
+    "prestart",
+    "Privé",
+    "procura",
+    "Procura",
+    "quickblox",
+    "Quickblox",
+    "rcompare",
+    "Rehabilit",
+    "RICM",
+    "Sante",
+    "Sarnia",
+    "Simcoe",
+    "skippable",
+    "sspr",
+    "Thornbrook",
+    "Timmins",
+    "unfound",
+    "Vaudreuil",
+    "zipcode"
+  ],
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+    "editor.formatOnSave": true
+  },
+  "[javascript]": {
+    "editor.formatOnSave": true
+  },
+  "editor.tabSize": 2,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "window.zoomLevel": 1,
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "eslint.run": "onType",
+  "eslint.format.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": ["javascript"],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "prettier.singleQuote": true
+}

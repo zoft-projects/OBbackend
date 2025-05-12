@@ -1,0 +1,188 @@
+{
+  "Environment": {
+    "name": "staging",
+    "port": 4000,
+    "apiBase": "/onebay-api/api/v3",
+    "serviceName": "OneBayshoreBackendService",
+    "auditLogExcludedPaths": ["/api/v3/healthcheck"],
+    "frontendURL": "https://staging.onebayshore.ca"
+  },
+  "tmpDirectory": "/tmp",
+  "identity": {
+    "primaryIdLen": 12
+  },
+  "Services": {
+    "onebayshore": {
+      "apiKeyHeader": "Service-Internal-Api-Key",
+      "legacyApiKeyHeader": "OneBayshore-Api-Key",
+      "apiSecretKeyName": "Onebayshore-Service-Internal-Api-Key",
+      "legacyApiSecretKeyName": "OneBayshore-Api-Key",
+      "qaApiKeyKeyHeader": "QA-Internal-Api-Key"
+    },
+    "mongo": {
+      "url": "",
+      "dbName": "staging-onebayshore-db",
+      "ssl": true
+    },
+    "firebase": {
+      "endpoint": "https://fcm.googleapis.com/v1/projects",
+      "projectId": "bayshore-a6cf7",
+      "firebaseTemplateSecrets": "Firebase-Config-Encoded",
+      "webConfigsSecretKeyName": "Firebase-Web-Configs"
+    },
+    "redis": {
+      "url": "",
+      "username": "",
+      "password": "",
+      "maxRetries": 20,
+      "tlsEnabled": true,
+      "prefix": "ob:{app}"
+    },
+    "s3": {
+      "region": "ca-central-1",
+      "bucketName": "www-staging-onebayshore-backend-service",
+      "compressionEnabled": false,
+      "signedUrlExpiryTime": 3600
+    },
+    "ses": {
+      "region": "ca-central-1",
+      "fromEmail": "DoNot-Reply@bayshore.ca"
+    },
+    "secretManager": {
+      "secretName": "staging-onebayshore-secrets",
+      "region": "ca-central-1"
+    },
+    "pingUserAuthorizer": {
+      "endpoint": "https://cpytoqqvu0.execute-api.ca-central-1.amazonaws.com/staging",
+      "clientId": "dx_oidc_client"
+    },
+    "quickblox": {
+      "secretKeyName": "Quickblox-Configs",
+      "qbApiEndpoint": "apistagingbayshore.quickblox.com",
+      "qbChatEndpoint": "chatstagingbayshore.quickblox.com",
+      "qbApplicationId": "26",
+      "debug": true,
+      "rootUserId": "1075",
+      "maxMessageProcessLimit": 10000
+    },
+    "azure": {
+      "secretKeyName": "ACS-Connection-String"
+    },
+    "mixpanel": {
+      "secretKeyName": "Mixpanel-Configs"
+    },
+    "IcsTaMasterTracker": {
+      "secretKeyName": "ICS-Master-Tracker-Sheet-Config"
+    },
+    "employeeService": {
+      "endpoint": "https://cpytoqqvu0.execute-api.ca-central-1.amazonaws.com/staging",
+      "apiKeyHeader": "Service-Internal-Api-Key",
+      "secretKeyName": "Service-Internal-Api-Key"
+    },
+    "clientService": {
+      "endpoint": "https://staging-api.mybayshorecare.ca",
+      "apiKeyHeader": "Service-Internal-Api-Key",
+      "secretKeyName": "User-Service-Internal-Api-Key"
+    },
+    "eventService": {
+      "endpoint": "https://8cmuoo6kt4.execute-api.ca-central-1.amazonaws.com/staging",
+      "apiKeyHeader": "Service-Internal-Api-Key",
+      "secretKeyName": "Family-Portal-Service-Internal-Api-Key"
+    },
+    "mailService": {
+      "vpceHost": "vpce-086a9cc554999dc80-wxtt5e2f.execute-api.ca-central-1.vpce.amazonaws.com",
+      "envPrefix": "/staging",
+      "hostUrl": "https://tirbgjr02j.execute-api.ca-central-1.amazonaws.com"
+    },
+    "availabilityService": {
+      "endpoint": "https://staging-api.mybayshorecare.ca",
+      "apiKeyHeader": "Service-Internal-Api-Key",
+      "secretKeyName": "Availability-Service-Internal-Api-Key"
+    },
+    "itServiceFtp": {
+      "credentialKey": "IT-Ftp-Credentials",
+      "host": "sftp.bayshore.ca",
+      "port": "22",
+      "folderPath": "/OneBayShore-Staging/Input"
+    },
+    "n8nService": {
+      "endpoint": "https://staging-n8n-service.dxp-bhc.com/webhook",
+      "summaryIdentifier": "76fb79d4-c2bb-4641-bc80-ed8bd130a25f",
+      "stubIdentifier": "316e127f-f4c7-4bdc-8575-e938f6646a22",
+      "user": "oneBayshore",
+      "secretKeyName": "n8n-Auth-Pass"
+    },
+    "bosService": {
+      "endpoint": "https://cpytoqqvu0.execute-api.ca-central-1.amazonaws.com/staging",
+      "apiKeyHeader": "Service-Internal-Api-Key",
+      "secretKeyName": "BOS-Service-Internal-Api-Key"
+    }
+  },
+  "Features": {
+    "profile": {
+      "updateLockedInDays": 180,
+      "passwordValidityInDays": 180,
+      "passwordWarnIfExpiresWithinDays": 85,
+      "forceChangePasswordForPsIds": ["0001040207"]
+    },
+    "visits": {
+      "alternateTimeCalculation": true,
+      "futureStatusIfVisitStartBeyondHours": 9,
+      "futureStatusOnVisitStartBeyond": "24 hours",
+      "futureStatusOnVisitStartBeyondImmediate": "15 mins",
+      "disabledStatusIfVisitBeyondHours": 16,
+      "progressNotesFromLastDays": 15,
+      "asyncApproach": true,
+      "progressNotesAllowedWithinHours": 1440,
+      "qaEnabled": true
+    },
+    "notifications": {
+      "backupPushNotificationResults": true
+    },
+    "recognitions": {
+      "notifyUser": true
+    },
+    "support": {
+      "supportEmailAddress": "anandhakrishnan.sm@zoftsolutions.com",
+      "helpDeskPhone": "1-877-289-3997",
+      "helpDeskEmail": "one@bayshore.ca"
+    },
+    "chat": {
+      "notifyUsers": true,
+      "notifiableAdminLevels": [2, 3, 4, 5],
+      "tokenExpiresInMinutes": 120,
+      "acsEndpoint": "https://staging-1bs-acs.canada.communication.azure.com",
+      "rootUserPsId": "0001053110",
+      "maxUsersAllowedInChat": 250,
+      "maxAdminsPerChatGroup": 150,
+      "canFieldStaffReply": false,
+      "attachmentsAllowed": false,
+      "richTextSupported": false,
+      "captureActivities": true,
+      "notificationsPaused": false,
+      "availableOnWeekends": true,
+      "chatOpenHour": 0,
+      "chatCloseHour": 24,
+      "systemGroups": [
+        {
+          "groupName": "All Members",
+          "jobCategory": null,
+          "categoryIdentifier": "AllMembers"
+        }
+      ]
+    },
+    "jobBoard": {
+      "audienceType": "Division",
+      "groupIds": ["D0000", "D0009"],
+      "cronEnabled": true
+    },
+    "wellnessImages": {
+      "timeThresholdToDeleteWellnessImages": "5m"
+    },
+    "mailbox": {
+      "supportEnabled": true,
+      "maxBatchUserSize": 100,
+      "mailDomainForFieldStaff": "staging.mail.onebayshore.ca"
+    }
+  }
+}

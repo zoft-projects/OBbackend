@@ -1,0 +1,44 @@
+name: Lint and verify builds
+
+on:
+  push:
+    branches-ignore: []
+  pull_request:
+    branches: [main]
+
+jobs:
+  run-super-linter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # super-linter needs the full git history to get the
+          # list of files that changed across commits
+          fetch-depth: 0
+      - uses: super-linter/super-linter@v5.7.2
+        env:
+          DEFAULT_BRANCH: main
+          VALIDATE_ALL_CODEBASE: false
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TYPESCRIPT_ES_CONFIG_FILE: .eslintrc.json
+          VALIDATE_TYPESCRIPT_ES: true
+          LINTER_RULES_PATH: /
+          VALIDATE_CLOUDFORMATION: true
+          VALIDATE_JSON: true
+  run-npm-test-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up node version for build
+        uses: actions/setup-node@v4.0.1
+        with:
+          node-version: '20.x'
+          registry-url: https://npm.pkg.github.com
+          scope: bayshore-healthcare
+      - name: npm install, testing cases and build
+        run: |
+          npm ci
+          npm run test
+          npm run build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
