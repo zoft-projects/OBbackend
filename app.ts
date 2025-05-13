@@ -108,6 +108,7 @@ export class App {
       res.header('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
       next();
     });
+    setupSwagger(this.app);
   }
 
   private initializeControllers(controllers: BaseController[]) {

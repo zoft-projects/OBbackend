@@ -10,7 +10,7 @@ const options = {
       version: '1.0.0',
     },
   },
-  apis: ['./lib/**/*.ts'], 
+  apis: ['./docs/**/*.ts'], 
 };
 
 const swaggerSpec = swaggerJsdoc(options);
